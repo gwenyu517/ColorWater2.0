@@ -7,8 +7,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 
-public class CustomColorPanel extends AbstractColorChooserPanel
-                              {
+public class CustomColorPanel extends AbstractColorChooserPanel{
     private GroupLayout layout;
 
     private JSlider rSlider;
@@ -19,9 +18,9 @@ public class CustomColorPanel extends AbstractColorChooserPanel
     private JLabel gLabel;
     private JLabel bLabel;
 
-    private int rVal;
-    private int gVal;
-    private int bVal;
+    private int rVal = 0;
+    private int gVal = 0;
+    private int bVal = 0;
 
     private final int MIN = 0;
     private final int MAX = 255;
@@ -50,6 +49,12 @@ public class CustomColorPanel extends AbstractColorChooserPanel
         createLayout();
     }
 
+    public void syncColor(Color color){
+        rSlider.setValue(color.getRed());
+        gSlider.setValue(color.getGreen());
+        bSlider.setValue(color.getBlue());
+    }
+
     private void createRSlider(){
         rSlider = new JSlider(JSlider.HORIZONTAL, MIN, MAX, INIT);
 
@@ -63,9 +68,8 @@ public class CustomColorPanel extends AbstractColorChooserPanel
         rSlider.addChangeListener(new ChangeListener(){
             public void stateChanged(ChangeEvent e){
                 JSlider source = (JSlider)e.getSource();
-                if (!source.getValueIsAdjusting())
-                    rVal = (int)source.getValue();
-                    System.out.println("R " + rVal);
+                rVal = (int)source.getValue();
+                getColorSelectionModel().setSelectedColor(new Color(rVal,gVal,bVal));
             }
         });
     }
@@ -82,9 +86,8 @@ public class CustomColorPanel extends AbstractColorChooserPanel
         gSlider.addChangeListener(new ChangeListener(){
             public void stateChanged(ChangeEvent e){
                 JSlider source = (JSlider)e.getSource();
-                if (!source.getValueIsAdjusting())
-                    gVal = (int)source.getValue();
-                    System.out.println("G " + gVal);
+                gVal = (int)source.getValue();
+                getColorSelectionModel().setSelectedColor(new Color(rVal,gVal,bVal));
             }
         });
     }
@@ -101,9 +104,8 @@ public class CustomColorPanel extends AbstractColorChooserPanel
         bSlider.addChangeListener(new ChangeListener(){
             public void stateChanged(ChangeEvent e){
                 JSlider source = (JSlider)e.getSource();
-                if (!source.getValueIsAdjusting())
-                    bVal = (int)source.getValue();
-                    System.out.println("B " + bVal);
+                bVal = (int)source.getValue();
+                getColorSelectionModel().setSelectedColor(new Color(rVal,gVal,bVal));
             }
         });
     }

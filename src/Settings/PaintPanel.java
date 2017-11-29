@@ -16,8 +16,8 @@ public class PaintPanel extends JPanel {
 
     private JColorChooser pcc;
 
-    AbstractColorChooserPanel presetPanel;
-    AbstractColorChooserPanel customPanel;
+    PresetColorPanel presetPanel;
+    CustomColorPanel customPanel;
 
 
     public PaintPanel(Settings settings){
@@ -34,7 +34,9 @@ public class PaintPanel extends JPanel {
         pcc = new JColorChooser();
         pcc.getSelectionModel().addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
-                settings.paintColor = pcc.getColor();
+                Color chosenColor = pcc.getColor();
+                settings.paintColor = chosenColor;
+                customPanel.syncColor(chosenColor);
             }
         });
 
@@ -44,7 +46,7 @@ public class PaintPanel extends JPanel {
         AbstractColorChooserPanel panels[] = {presetPanel, customPanel};
         pcc.setChooserPanels(panels);
 
-        pcc.setPreviewPanel(new JPanel());
+      //  pcc.setPreviewPanel(new JPanel());
 
         createLayout();
     }
@@ -67,13 +69,15 @@ public class PaintPanel extends JPanel {
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addComponent(presetPanel)
                         .addComponent(customPanel))
+                .addComponent(pcc.getPreviewPanel())
         );
 
         layout.setVerticalGroup(
           layout.createSequentialGroup()
                   .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                           .addComponent(label1)
-                          .addComponent(presetPanel))
+                          .addComponent(presetPanel)
+                  .addComponent(pcc.getPreviewPanel()))
                   .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                           .addComponent(label2)
                           .addComponent(customPanel))
