@@ -52,8 +52,6 @@ public class ImageFrame extends JFrame {
 
     private void addTabs(){
         tabs = new SettingsPanel(settings);
-       // tabs = new SettingsPanel();
-        //settings = new Settings(tabs);
         this.getContentPane().add(tabs, BorderLayout.WEST);
     }
 

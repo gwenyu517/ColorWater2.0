@@ -11,6 +11,11 @@ public class SettingsPanel extends JPanel{
     public SettingsPanel(Settings settings){
         super(new GridLayout(1,1));
 
+   /*     Dimension size = new Dimension(500, 100);
+        setMinimumSize(size);
+        setMaximumSize(size);
+        setPreferredSize(size);*/
+
         this.settings = settings;
 
         JTabbedPane tabbedPane = new JTabbedPane();

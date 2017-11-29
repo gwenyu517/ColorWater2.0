@@ -9,28 +9,76 @@ import java.awt.*;
 public class PaintPanel extends JPanel {
     private Settings settings;
 
-    private JColorChooser presets;
-    private JColorChooser custom;
+    private GroupLayout layout;
+
+    private JLabel presetLabel;
+    private JLabel customLabel;
+
+    private JColorChooser pcc;
+
+    AbstractColorChooserPanel presetPanel;
+    AbstractColorChooserPanel customPanel;
 
 
     public PaintPanel(Settings settings){
         this.settings = settings;
 
-        presets = new JColorChooser();
-        presets.getSelectionModel().addChangeListener(new ChangeListener() {
+   /*     Dimension size = new Dimension(500, 100);
+        setMinimumSize(size);
+        setMaximumSize(size);
+        setPreferredSize(size);*/
+
+        presetLabel = new JLabel("Presets");
+        customLabel = new JLabel("Custom");
+
+        pcc = new JColorChooser();
+        pcc.getSelectionModel().addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
-                settings.paintColor = presets.getColor();
+                settings.paintColor = pcc.getColor();
             }
         });
-        addPresetPanel();
 
+        presetPanel = new PresetColorPanel();
+        customPanel = new CustomColorPanel();
 
+        AbstractColorChooserPanel panels[] = {presetPanel, customPanel};
+        pcc.setChooserPanels(panels);
+
+        pcc.setPreviewPanel(new JPanel());
+
+        createLayout();
     }
 
-    private void addPresetPanel(){
-        AbstractColorChooserPanel panel[] = {new PresetColorPanel()};
-        presets.setChooserPanels(panel);
+    private void createLayout(){
+        layout = new GroupLayout(this);
+        this.setLayout(layout);
 
-        add(presets, BorderLayout.PAGE_END);
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
+
+        JLabel label1 = new JLabel("Presets");
+        JLabel label2 = new JLabel("Custom");
+
+        layout.setHorizontalGroup(
+          layout.createSequentialGroup()
+                  .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                          .addComponent(label1)
+                          .addComponent(label2))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(presetPanel)
+                        .addComponent(customPanel))
+        );
+
+        layout.setVerticalGroup(
+          layout.createSequentialGroup()
+                  .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                          .addComponent(label1)
+                          .addComponent(presetPanel))
+                  .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                          .addComponent(label2)
+                          .addComponent(customPanel))
+        );
+
+        layout.preferredLayoutSize(this);
     }
 }

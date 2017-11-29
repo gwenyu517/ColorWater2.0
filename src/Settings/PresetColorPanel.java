@@ -7,38 +7,97 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
+import java.security.acl.Group;
 
 public class PresetColorPanel extends AbstractColorChooserPanel{
 
     private final int SQUARE_SIZE = 8;
 
-    private JToggleButton r,o,y,g,b,i,v;
+    private GroupLayout layout;
 
-    private BufferedImage redImage;
-    private BufferedImage orangeImage;
-    private BufferedImage yellowImage;
-    private BufferedImage greenImage;
-    private BufferedImage blueImage;
-    private BufferedImage indigoImage;
-    private BufferedImage violetImage;
+    private JToggleButton red,
+                          orange,
+                          yellow,
+                          green,
+                          blue,
+                          indigo,
+                          violet,
+                          black;
+
+    private BufferedImage redImage,
+                          orangeImage,
+                          yellowImage,
+                          greenImage,
+                          blueImage,
+                          indigoImage,
+                          violetImage,
+                          blackImage;
 
     public void updateChooser(){
         Color color = getColorFromModel();
         if (Color.RED.equals(color))
-            r.setSelected(true);
+            red.setSelected(true);
         else if (Color.ORANGE.equals(color))
-            o.setSelected(true);
+            orange.setSelected(true);
         else if (Color.YELLOW.equals(color))
-            y.setSelected(true);
+            yellow.setSelected(true);
         else if (Color.GREEN.equals(color))
-            g.setSelected(true);
+            green.setSelected(true);
         else if (Color.BLUE.equals(color))
-            b.setSelected(true);
+            blue.setSelected(true);
         else if ((new Color(8, 0, 130)).equals(color))
-            i.setSelected(true);
+            indigo.setSelected(true);
         else if ((new Color(128, 0, 238)).equals(color))
-            v.setSelected(true);
+            violet.setSelected(true);
+        else if (Color.BLACK.equals(color))
+            black.setSelected(true);
+    }
+
+    protected void buildChooser(){
+     //   setLayout(new GridLayout(1,7, 3,1));
+     /*   Dimension size = new Dimension(250, 20);
+        setMinimumSize(size);
+        setMaximumSize(size);
+        setPreferredSize(size);*/
+
+        ButtonGroup presetSquares = new ButtonGroup();
+        Border border = BorderFactory.createEmptyBorder();
+
+        createImages();
+
+        red = createSquares("red", redImage, border);
+        presetSquares.add(red);
+        add(red);
+
+        orange = createSquares("orange", orangeImage, border);
+        presetSquares.add(orange);
+        add(orange);
+
+        yellow = createSquares("yellow", yellowImage, border);
+        presetSquares.add(yellow);
+        add(yellow);
+
+        green = createSquares("green", greenImage, border);
+        presetSquares.add(green);
+        add(green);
+
+        blue = createSquares("blue", blueImage, border);
+        presetSquares.add(blue);
+        add(blue);
+
+        indigo = createSquares("indigo", indigoImage, border);
+        presetSquares.add(indigo);
+        add(indigo);
+
+        violet = createSquares("violet", violetImage, border);
+        presetSquares.add(violet);
+        add(violet);
+
+        black = createSquares("black", blackImage, border);
+        presetSquares.add(black);
+        add(black);
+
+        createLayout();
     }
 
     private JToggleButton createSquares(String name, BufferedImage image, Border normalBorder){
@@ -63,6 +122,8 @@ public class PresetColorPanel extends AbstractColorChooserPanel{
                     newColor = new Color(8, 0, 130);
                 else if ("violet".equals(command))
                     newColor = new Color(128, 0, 238);
+                else if ("black".equals(command))
+                    newColor = Color.BLACK;
 
                 getColorSelectionModel().setSelectedColor(newColor);
             }
@@ -79,43 +140,6 @@ public class PresetColorPanel extends AbstractColorChooserPanel{
         }
 
         return square;
-    }
-
-    protected void buildChooser(){
-        setLayout(new GridLayout(1,7, 3,1));
-
-        ButtonGroup presetSquares = new ButtonGroup();
-        Border border = BorderFactory.createEmptyBorder();
-
-        createImages();
-
-        r = createSquares("red", redImage, border);
-        presetSquares.add(r);
-        add(r);
-
-        o = createSquares("orange", orangeImage, border);
-        presetSquares.add(o);
-        add(o);
-
-        y = createSquares("yellow", yellowImage, border);
-        presetSquares.add(y);
-        add(y);
-
-        g = createSquares("green", greenImage, border);
-        presetSquares.add(g);
-        add(g);
-
-        b = createSquares("blue", blueImage, border);
-        presetSquares.add(b);
-        add(b);
-
-        i = createSquares("indigo", indigoImage, border);
-        presetSquares.add(i);
-        add(i);
-
-        v = createSquares("violet", violetImage, border);
-        presetSquares.add(v);
-        add(v);
     }
 
     private void createImages(){
@@ -155,6 +179,44 @@ public class PresetColorPanel extends AbstractColorChooserPanel{
         g2d = violetImage.createGraphics();
         g2d.setColor(new Color(128, 0, 238));
         g2d.fillRect(0,0,SQUARE_SIZE,SQUARE_SIZE);
+
+        blackImage = new BufferedImage(SQUARE_SIZE,SQUARE_SIZE, BufferedImage.TYPE_INT_ARGB);
+        g2d = blackImage.createGraphics();
+        g2d.setColor(Color.BLACK);
+        g2d.fillRect(0,0,SQUARE_SIZE,SQUARE_SIZE);
+    }
+
+    private void createLayout(){
+        layout = new GroupLayout(this);
+        this.setLayout(layout);
+
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
+
+        layout.setHorizontalGroup(
+          layout.createSequentialGroup()
+                .addComponent(red)
+                .addComponent(orange)
+                .addComponent(yellow)
+                .addComponent(green)
+                .addComponent(blue)
+                .addComponent(indigo)
+                .addComponent(violet)
+                .addComponent(black)
+        );
+
+        layout.setVerticalGroup(
+          layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                        .addComponent(red)
+                        .addComponent(orange)
+                        .addComponent(yellow)
+                        .addComponent(green)
+                        .addComponent(blue)
+                        .addComponent(indigo)
+                        .addComponent(violet)
+                        .addComponent(black))
+        );
     }
 
     public String getDisplayName(){
