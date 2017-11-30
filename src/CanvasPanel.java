@@ -19,6 +19,10 @@ public class CanvasPanel extends JPanel {
     private int MILLESECONDS_BEFORE_DRY = 1000;
     private Color evapColor = new Color(255, 255, 255, 50);
 
+    // PaintLayer
+    private BufferedImage paintLayer;
+    private Graphics2D p_g2d;
+
     public CanvasPanel(Settings settings){
         this.settings = settings;
 
@@ -33,18 +37,27 @@ public class CanvasPanel extends JPanel {
         waterLayer = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
         w_g2d = waterLayer.createGraphics();
 
+        paintLayer = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
+        p_g2d = paintLayer.createGraphics();
+
         createNewCanvas();
         createDryMask();
 
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent event){
             //    eh = event.getPoint();
-                addDropAt(event.getPoint());
+                if (SwingUtilities.isRightMouseButton(event))
+                    addWaterDropAt(event.getPoint());
+                else if (SwingUtilities.isLeftMouseButton(event))
+                    addPaintDropAt(event.getPoint());
             }
         });
         addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseDragged(MouseEvent event){
-                addDropAt(event.getPoint());
+                if (SwingUtilities.isRightMouseButton(event))
+                    addWaterDropAt(event.getPoint());
+                else if (SwingUtilities.isLeftMouseButton(event))
+                    addPaintDropAt(event.getPoint());
             }
         });
 
@@ -63,7 +76,8 @@ public class CanvasPanel extends JPanel {
     }
 
     private void createNewCanvas(){
-
+        p_g2d.setColor(Color.WHITE);
+        p_g2d.fillRect(0, 0, WIDTH, HEIGHT);
     }
 
     private void createDryMask(){
@@ -102,10 +116,11 @@ public class CanvasPanel extends JPanel {
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
     private int dropDuration = 20;
 
-    private void addDropAt(Point point){
+    private void addWaterDropAt(Point point){
         new Thread( new Runnable(){
             public void run(){
                 Drop drop = new Drop(settings.getBrushSize(), waterLayer);
+                drop.setWetAreaMask(null);
                 drop.setDropColor(new Color(0,0,0,10));
 
                 for (int i = 0; i < dropDuration; ++i){
@@ -115,6 +130,33 @@ public class CanvasPanel extends JPanel {
                         drop.spread();
 
                     waterLayer = drop.getImage();
+
+            /*        SwingUtilities.invokeLater(
+                            new Runnable(){
+                                public void run(){
+                                    repaint();
+                                }
+                            }
+                    );*/
+                }
+            }
+        }).start();
+    }
+
+    private void addPaintDropAt(Point point){
+        new Thread( new Runnable(){
+            public void run(){
+                Drop drop = new Drop(settings.getBrushSize(), paintLayer);
+                drop.setWetAreaMask(waterLayer);
+                drop.setDropColor(settings.getPaintColor());
+
+                for (int i = 0; i < dropDuration; ++i){
+                    if (i == 0)
+                        drop.dripAt(point);
+                    else
+                        drop.spread();
+
+                    paintLayer = drop.getImage();
 
                     SwingUtilities.invokeLater(
                             new Runnable(){
@@ -130,6 +172,6 @@ public class CanvasPanel extends JPanel {
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(waterLayer, 0, 0, null);
+        g.drawImage(paintLayer, 0, 0, null);
     }
 }

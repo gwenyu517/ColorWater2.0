@@ -7,6 +7,8 @@ public class Drop{
     private BufferedImage applicationLayer;
     private Graphics2D g2d;
 
+    private BufferedImage wetAreaMask;
+
     private int dropSize;
 
     private Point location;
@@ -15,9 +17,9 @@ public class Drop{
     private int pRadius = 5;
     private int pDiam = 2 * pRadius;
 
-    private int intensity = 7;
+    private int intensity = 3;
 
-    private double maxRotation = 0.5;
+    private double maxRotation = 0.8;
 
 
     public Drop(int dropSize, BufferedImage applicationLayer){
@@ -38,6 +40,10 @@ public class Drop{
 
     public void setDropColor(Color color){
         g2d.setColor(color);
+    }
+
+    public void setWetAreaMask(BufferedImage wetAreaMask){
+        this.wetAreaMask = wetAreaMask;
     }
 
     private void determineNumOfPart(){
@@ -105,10 +111,29 @@ public class Drop{
             x = 5*Math.cos(particles[i].theta) + particles[i].x;
             y = 5* -1 * Math.sin(particles[i].theta) + particles[i].y;
 
-            g2d.fill(new Ellipse2D.Double(x, y, 10, 10));
-            particles[i].x = x;
-            particles[i].y = y;
+
+            if (withinWetMask(x, y)){
+                g2d.fill(new Ellipse2D.Double(x, y, 10, 10));
+                particles[i].x = x;
+                particles[i].y = y;
+            }
+            else{
+                g2d.fill(new Ellipse2D.Double(particles[i].x, particles[i].y, 10, 10));
+            }
         }
+    }
+
+    private boolean withinWetMask(double x, double y){
+        if (wetAreaMask == null)
+            return true;
+        else if (extractR(wetAreaMask.getRGB((int)x, (int)y)) < 253)
+            return true;
+        else
+            return false;
+    }
+
+    private static int extractR(int ARGB){
+        return (ARGB >>> 16) & 0x000000FF;
     }
 
     private double randomValue(){

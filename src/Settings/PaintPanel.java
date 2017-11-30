@@ -39,7 +39,7 @@ public class PaintPanel extends JPanel {
                 //customPanel.syncColor(chosenColor);
 
 
-                Color it = new Color(chosenColor.getRed(), chosenColor.getGreen(), chosenColor.getBlue(), 30);
+                Color it = new Color(chosenColor.getRed(), chosenColor.getGreen(), chosenColor.getBlue(), 10);
                 settings.paintColor = it;
                 customPanel.syncColor(it);
             }
