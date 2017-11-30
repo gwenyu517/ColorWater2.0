@@ -35,8 +35,13 @@ public class PaintPanel extends JPanel {
         pcc.getSelectionModel().addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 Color chosenColor = pcc.getColor();
-                settings.paintColor = chosenColor;
-                customPanel.syncColor(chosenColor);
+              //  settings.paintColor = chosenColor;
+                //customPanel.syncColor(chosenColor);
+
+
+                Color it = new Color(chosenColor.getRed(), chosenColor.getGreen(), chosenColor.getBlue(), 30);
+                settings.paintColor = it;
+                customPanel.syncColor(it);
             }
         });
 
@@ -68,19 +73,19 @@ public class PaintPanel extends JPanel {
                           .addComponent(label2))
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addComponent(presetPanel)
-                        .addComponent(customPanel))
-                .addComponent(pcc.getPreviewPanel())
+                        .addComponent(customPanel)
+                        .addComponent(pcc.getPreviewPanel()))
         );
 
         layout.setVerticalGroup(
           layout.createSequentialGroup()
                   .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                          .addComponent(label1)
+                          .addComponent(label1))
                           .addComponent(presetPanel)
-                  .addComponent(pcc.getPreviewPanel()))
                   .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                           .addComponent(label2)
                           .addComponent(customPanel))
+                  .addComponent(pcc.getPreviewPanel())
         );
 
         layout.preferredLayoutSize(this);

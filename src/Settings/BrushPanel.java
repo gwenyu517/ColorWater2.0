@@ -9,8 +9,8 @@ public class BrushPanel extends JPanel {
     private Settings settings;
 
     final int SIZE_MIN = 0;
-    final int SIZE_MAX = 30;
-    final int SIZE_INIT = 15;
+    final int SIZE_MAX = 10;
+    final int SIZE_INIT = 5;
 
     JSlider brushSizeSlider;
 

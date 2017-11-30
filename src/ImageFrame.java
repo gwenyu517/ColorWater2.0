@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import Settings.Settings;
 import Settings.SettingsPanel;
@@ -15,7 +17,7 @@ public class ImageFrame extends JFrame {
 
         settings = new Settings();
 
-        // addMenu();
+   //      addMenu();
         addTabs();
         addCanvas();
 
@@ -23,13 +25,13 @@ public class ImageFrame extends JFrame {
         this.setVisible(true);
     }
 
-    private void addMenu(){
+ /*   private void addMenu(){
         JMenu fileMenu = new JMenu("File");
 
-     /*   JMenuItem waterItem = new JMenuItem("Water mode");
+        JMenuItem waterItem = new JMenuItem("Water mode");
         waterItem.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event){
-      //          c.setWaterMode(true);
+                canvasPanel.setWaterMode(true);
             }
         } );
 
@@ -38,17 +40,17 @@ public class ImageFrame extends JFrame {
         JMenuItem colorItem = new JMenuItem("Color mode");
         colorItem.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event){
-       //         c.setWaterMode(false);
+                canvasPanel.setWaterMode(false);
             }
         } );
 
         fileMenu.add(colorItem);
-        */
+
 
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(fileMenu);
         this.setJMenuBar(menuBar);
-    }
+    }*/
 
     private void addTabs(){
         tabs = new SettingsPanel(settings);

@@ -22,9 +22,33 @@ public class Settings {
         verticalAngle = 0;
         horizontalAngle = 0;
 
-        canvasWidth = 500;
-        canvasHeight = 500;
+        canvasWidth = 1000;
+        canvasHeight = 1000;
 
+    }
+
+    public Color getPaintColor(){
+        return paintColor;
+    }
+
+    public int getBrushSize(){
+        return brushSize;
+    }
+
+    public double getVerticalAngle(){
+        return verticalAngle;
+    }
+
+    public double getHorizontalAngle(){
+        return horizontalAngle;
+    }
+
+    public int getCanvasWidth(){
+        return canvasWidth;
+    }
+
+    public int getCanvasHeight(){
+        return canvasHeight;
     }
 
 }
