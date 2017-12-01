@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 
-public class CanvasPanel extends JPanel {
+public class Canvas extends JPanel {
     private Settings settings;
 
     private final int WIDTH;
@@ -23,7 +23,7 @@ public class CanvasPanel extends JPanel {
     private BufferedImage paintLayer;
     private Graphics2D p_g2d;
 
-    public CanvasPanel(Settings settings){
+    public Canvas(Settings settings){
         this.settings = settings;
 
         WIDTH = settings.getCanvasWidth();

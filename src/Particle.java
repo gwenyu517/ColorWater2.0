@@ -43,6 +43,10 @@ public class Particle {
             direction = -1.0;
     }
 
+    public void setP(double p){
+        this.p = p;
+    }
+
     public double randomValue(){
         Random r = new Random();
         return r.nextDouble();

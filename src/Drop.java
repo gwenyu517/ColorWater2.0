@@ -17,7 +17,7 @@ public class Drop{
     private int pRadius = 5;
     private int pDiam = 2 * pRadius;
 
-    private int intensity = 3;
+    private int intensity = 2;
 
     private double maxRotation = 0.8;
 
@@ -121,8 +121,9 @@ public class Drop{
 
             particles[i].theta += maxRotation * randomValue() * particles[i].direction;
 
-            x = 5*Math.cos(particles[i].theta) + particles[i].x;
-            y = 5* -1 * Math.sin(particles[i].theta) + particles[i].y;
+
+            x = pDiam*Math.cos(particles[i].theta) + particles[i].x;
+            y = pDiam* -1 * Math.sin(particles[i].theta) + particles[i].y;
 
 
             if (withinWetMask(x, y)){
@@ -134,6 +135,7 @@ public class Drop{
                 g2d.fill(new Ellipse2D.Double(particles[i].x, particles[i].y, pDiam, pDiam));
             }
         }
+        pDiam = (int)(pDiam * 0.8);
     }
 
     private boolean withinWetMask(double x, double y){

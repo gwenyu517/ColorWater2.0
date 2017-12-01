@@ -5,7 +5,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 
-public class BrushPanel extends JPanel {
+public class BrushTab extends JPanel {
     private Settings settings;
 
     private GroupLayout layout;
@@ -20,7 +20,7 @@ public class BrushPanel extends JPanel {
     JSlider paintBrushSizeSlider;
     JSlider waterBrushSizeSlider;
 
-    public BrushPanel(Settings settings){
+    public BrushTab(Settings settings){
         this.settings = settings;
 
         // Create the label
@@ -59,7 +59,7 @@ public class BrushPanel extends JPanel {
             public void stateChanged(ChangeEvent e){
                 JSlider source = (JSlider)e.getSource();
                 if (!source.getValueIsAdjusting())
-                    settings.paintBrushSize = (int)source.getValue();
+                    settings.setPaintBrushSize((int)source.getValue());
             }
         });
     }
@@ -79,7 +79,7 @@ public class BrushPanel extends JPanel {
             public void stateChanged(ChangeEvent e){
                 JSlider source = (JSlider)e.getSource();
                 if (!source.getValueIsAdjusting())
-                    settings.waterBrushSize = (int)source.getValue();
+                    settings.setWaterBrushSize((int)source.getValue());
             }
         });
     }
