@@ -1,19 +1,22 @@
 package Settings;
 
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
 
-public class Settings {
+public class Settings{
 
-    protected Color paintColor;
-    protected int waterBrushSize;
-    protected int paintBrushSize;
+    private Color paintColor;
+    private int waterBrushSize;
+    private int paintBrushSize;
 
-    protected double verticalAngle;
-    protected double horizontalAngle;
+    private double verticalAngle;
+    private double horizontalAngle;
 
-    protected int canvasWidth;
-    protected int canvasHeight;
+    private CanvasDimension canvasDimension;
+    private int canvasWidth;
+    private int canvasHeight;
 
 
     public Settings(){
@@ -24,9 +27,10 @@ public class Settings {
         verticalAngle = 0;
         horizontalAngle = 0;
 
+        canvasDimension = new CanvasDimension(1000, 1000);
+
         canvasWidth = 1000;
         canvasHeight = 1000;
-
     }
 
     public Color getPaintColor(){
@@ -49,12 +53,44 @@ public class Settings {
         return horizontalAngle;
     }
 
+    public CanvasDimension getCanvasDimension(){
+        return canvasDimension;
+    }
+
     public int getCanvasWidth(){
-        return canvasWidth;
+        return canvasDimension.getWidth();
     }
 
     public int getCanvasHeight(){
-        return canvasHeight;
+        return canvasDimension.getHeight();
+    }
+
+    public void setPaintColor(Color color){
+        paintColor = color;
+    }
+
+    public void setWaterBrushSize(int size){
+        waterBrushSize = size;
+    }
+
+    public void setPaintBrushSize(int size){
+        paintBrushSize = size;
+    }
+
+    public void setVerticalAngle(double angle){
+        verticalAngle = angle;
+    }
+
+    public void setHorizontalAngle(double angle){
+        horizontalAngle = angle;
+    }
+
+    public void setCanvasWidth(int width){
+        canvasWidth = width;
+    }
+
+    public void setCanvasHeight(int height){
+        canvasHeight = height;
     }
 
 }

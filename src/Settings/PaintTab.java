@@ -6,7 +6,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 
-public class PaintPanel extends JPanel {
+public class PaintTab extends JPanel {
     private Settings settings;
 
     private GroupLayout layout;
@@ -20,7 +20,7 @@ public class PaintPanel extends JPanel {
     CustomColorPanel customPanel;
 
 
-    public PaintPanel(Settings settings){
+    public PaintTab(Settings settings){
         this.settings = settings;
 
    /*     Dimension size = new Dimension(500, 100);
@@ -35,12 +35,12 @@ public class PaintPanel extends JPanel {
         pcc.getSelectionModel().addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 Color chosenColor = pcc.getColor();
-              //  settings.paintColor = chosenColor;
+                //  settings.paintColor = chosenColor;
                 //customPanel.syncColor(chosenColor);
 
 
                 Color it = new Color(chosenColor.getRed(), chosenColor.getGreen(), chosenColor.getBlue(), 10);
-                settings.paintColor = it;
+                settings.setPaintColor(it);
                 customPanel.syncColor(it);
             }
         });
@@ -51,7 +51,7 @@ public class PaintPanel extends JPanel {
         AbstractColorChooserPanel panels[] = {presetPanel, customPanel};
         pcc.setChooserPanels(panels);
 
-      //  pcc.setPreviewPanel(new JPanel());
+        //  pcc.setPreviewPanel(new JPanel());
 
         createLayout();
     }
@@ -64,25 +64,25 @@ public class PaintPanel extends JPanel {
         layout.setAutoCreateContainerGaps(true);
 
         layout.setHorizontalGroup(
-          layout.createSequentialGroup()
-                  .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                          .addComponent(presetLabel)
-                          .addComponent(customLabel))
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(presetPanel)
-                        .addComponent(customPanel)
-                        .addComponent(pcc.getPreviewPanel()))
+                layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(presetLabel)
+                                .addComponent(customLabel))
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(presetPanel)
+                                .addComponent(customPanel)
+                                .addComponent(pcc.getPreviewPanel()))
         );
 
         layout.setVerticalGroup(
-          layout.createSequentialGroup()
-                  .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                          .addComponent(presetLabel))
-                          .addComponent(presetPanel)
-                  .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                          .addComponent(customLabel)
-                          .addComponent(customPanel))
-                  .addComponent(pcc.getPreviewPanel())
+                layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(presetLabel))
+                        .addComponent(presetPanel)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(customLabel)
+                                .addComponent(customPanel))
+                        .addComponent(pcc.getPreviewPanel())
         );
 
         layout.preferredLayoutSize(this);

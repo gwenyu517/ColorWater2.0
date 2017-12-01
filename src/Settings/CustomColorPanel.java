@@ -63,7 +63,7 @@ public class CustomColorPanel extends AbstractColorChooserPanel{
         rSlider.setMinorTickSpacing(256);
         rSlider.setPaintTicks(true);
         rSlider.setPaintLabels(false);
-    //    rSlider.setBorder(                BorderFactory.createEmptyBorder(0,0,10,0));
+        //    rSlider.setBorder(                BorderFactory.createEmptyBorder(0,0,10,0));
 
         rSlider.addChangeListener(new ChangeListener(){
             public void stateChanged(ChangeEvent e){
@@ -81,7 +81,7 @@ public class CustomColorPanel extends AbstractColorChooserPanel{
         gSlider.setMinorTickSpacing(256);
         gSlider.setPaintTicks(true);
         gSlider.setPaintLabels(false);
-   //     gSlider.setBorder(                BorderFactory.createEmptyBorder(0,0,10,0));
+        //     gSlider.setBorder(                BorderFactory.createEmptyBorder(0,0,10,0));
 
         gSlider.addChangeListener(new ChangeListener(){
             public void stateChanged(ChangeEvent e){
@@ -99,7 +99,7 @@ public class CustomColorPanel extends AbstractColorChooserPanel{
         bSlider.setMinorTickSpacing(256);
         bSlider.setPaintTicks(true);
         bSlider.setPaintLabels(false);
-     //   bSlider.setBorder(                BorderFactory.createEmptyBorder(0,0,10,0));
+        //   bSlider.setBorder(                BorderFactory.createEmptyBorder(0,0,10,0));
 
         bSlider.addChangeListener(new ChangeListener(){
             public void stateChanged(ChangeEvent e){
@@ -118,28 +118,28 @@ public class CustomColorPanel extends AbstractColorChooserPanel{
         layout.setAutoCreateContainerGaps(true);
 
         layout.setHorizontalGroup(
-          layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(rLabel)
-                        .addComponent(gLabel)
-                        .addComponent(bLabel))
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(rSlider)
-                        .addComponent(gSlider)
-                        .addComponent(bSlider))
+                layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(rLabel)
+                                .addComponent(gLabel)
+                                .addComponent(bLabel))
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(rSlider)
+                                .addComponent(gSlider)
+                                .addComponent(bSlider))
         );
 
         layout.setVerticalGroup(
-          layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(rLabel)
-                        .addComponent(rSlider))
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(gLabel)
-                        .addComponent(gSlider))
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(bLabel)
-                        .addComponent(bSlider))
+                layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(rLabel)
+                                .addComponent(rSlider))
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(gLabel)
+                                .addComponent(gSlider))
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(bLabel)
+                                .addComponent(bSlider))
         );
     }
 

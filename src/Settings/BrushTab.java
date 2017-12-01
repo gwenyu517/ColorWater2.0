@@ -3,29 +3,24 @@ package Settings;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.*;
 
 public class BrushTab extends JPanel {
     private Settings settings;
 
     private GroupLayout layout;
 
-    final int SIZE_MIN = 0;
-    final int SIZE_MAX = 10;
-    final int SIZE_INIT = 5;
+    private final int SIZE_MIN = 1;
+    private final int SIZE_MAX = 10;
+    private final int SIZE_INIT = 5;
 
-    JLabel pbLabel;
-    JLabel wbLabel;
+    private JLabel pbLabel;
+    private JLabel wbLabel;
 
-    JSlider paintBrushSizeSlider;
-    JSlider waterBrushSizeSlider;
+    private JSlider paintBrushSizeSlider;
+    private JSlider waterBrushSizeSlider;
 
-    public BrushTab(Settings settings){
+    protected BrushTab(Settings settings){
         this.settings = settings;
-
-        // Create the label
- //       JLabel sliderLabel = new JLabel("Brush Size", JLabel.LEFT);
-   //     sliderLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         pbLabel = new JLabel("Paint Brush Size");
         wbLabel = new JLabel("Water Brush Size");
@@ -37,11 +32,6 @@ public class BrushTab extends JPanel {
         // ToDo: addPreview();
 
         createLayout();
-
-        // Put everything together
-     //   this.add(sliderLabel);
-       // this.add(paintBrushSizeSlider);
-        //this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
     }
 
     private void addPBSlider(){
@@ -59,7 +49,7 @@ public class BrushTab extends JPanel {
             public void stateChanged(ChangeEvent e){
                 JSlider source = (JSlider)e.getSource();
                 if (!source.getValueIsAdjusting())
-                    settings.setPaintBrushSize((int)source.getValue());
+                    settings.setPaintBrushSize(source.getValue());
             }
         });
     }
@@ -79,7 +69,7 @@ public class BrushTab extends JPanel {
             public void stateChanged(ChangeEvent e){
                 JSlider source = (JSlider)e.getSource();
                 if (!source.getValueIsAdjusting())
-                    settings.setWaterBrushSize((int)source.getValue());
+                    settings.setWaterBrushSize(source.getValue());
             }
         });
     }

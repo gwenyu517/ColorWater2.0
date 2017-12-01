@@ -16,22 +16,22 @@ public class PresetColorPanel extends AbstractColorChooserPanel{
     private GroupLayout layout;
 
     private JToggleButton red,
-                          orange,
-                          yellow,
-                          green,
-                          blue,
-                          indigo,
-                          violet,
-                          black;
+            orange,
+            yellow,
+            green,
+            blue,
+            indigo,
+            violet,
+            black;
 
     private BufferedImage redImage,
-                          orangeImage,
-                          yellowImage,
-                          greenImage,
-                          blueImage,
-                          indigoImage,
-                          violetImage,
-                          blackImage;
+            orangeImage,
+            yellowImage,
+            greenImage,
+            blueImage,
+            indigoImage,
+            violetImage,
+            blackImage;
 
     public void updateChooser(){
         Color color = getColorFromModel();
@@ -54,7 +54,7 @@ public class PresetColorPanel extends AbstractColorChooserPanel{
     }
 
     protected void buildChooser(){
-     //   setLayout(new GridLayout(1,7, 3,1));
+        //   setLayout(new GridLayout(1,7, 3,1));
      /*   Dimension size = new Dimension(250, 20);
         setMinimumSize(size);
         setMaximumSize(size);
@@ -194,20 +194,7 @@ public class PresetColorPanel extends AbstractColorChooserPanel{
         layout.setAutoCreateContainerGaps(true);
 
         layout.setHorizontalGroup(
-          layout.createSequentialGroup()
-                .addComponent(red)
-                .addComponent(orange)
-                .addComponent(yellow)
-                .addComponent(green)
-                .addComponent(blue)
-                .addComponent(indigo)
-                .addComponent(violet)
-                .addComponent(black)
-        );
-
-        layout.setVerticalGroup(
-          layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                layout.createSequentialGroup()
                         .addComponent(red)
                         .addComponent(orange)
                         .addComponent(yellow)
@@ -215,7 +202,20 @@ public class PresetColorPanel extends AbstractColorChooserPanel{
                         .addComponent(blue)
                         .addComponent(indigo)
                         .addComponent(violet)
-                        .addComponent(black))
+                        .addComponent(black)
+        );
+
+        layout.setVerticalGroup(
+                layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                                .addComponent(red)
+                                .addComponent(orange)
+                                .addComponent(yellow)
+                                .addComponent(green)
+                                .addComponent(blue)
+                                .addComponent(indigo)
+                                .addComponent(violet)
+                                .addComponent(black))
         );
     }
 

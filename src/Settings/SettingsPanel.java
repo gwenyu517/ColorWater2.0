@@ -20,19 +20,19 @@ public class SettingsPanel extends JPanel{
 
         JTabbedPane tabbedPane = new JTabbedPane();
 
-        JComponent brushPanel = new BrushPanel(settings);
-        tabbedPane.addTab("Brush", brushPanel);
+        JComponent brushTab = new BrushTab(settings);
+        tabbedPane.addTab("Brush", brushTab);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 
-        JComponent paintPanel = new PaintPanel(settings);
-        tabbedPane.addTab("Paint", paintPanel);
+        JComponent paintTab = new PaintTab(settings);
+        tabbedPane.addTab("Paint", paintTab);
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
 
 
-        //    JComponent canvasPanel = makeTextPanel("Canvas");
-        //   tabbedPane.addTab("Canvas", canvasPanel);
+        JComponent canvasTab = new CanvasTab(settings);
+        tabbedPane.addTab("Canvas", canvasTab);
         //   canvasPanel.setPreferredSize(new Dimension(500, 1000));
-        //   tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
+        tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
 
 
         add(tabbedPane);
