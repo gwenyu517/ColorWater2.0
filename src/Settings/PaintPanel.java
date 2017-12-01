@@ -63,14 +63,11 @@ public class PaintPanel extends JPanel {
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
 
-        JLabel label1 = new JLabel("Presets");
-        JLabel label2 = new JLabel("Custom");
-
         layout.setHorizontalGroup(
           layout.createSequentialGroup()
                   .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                          .addComponent(label1)
-                          .addComponent(label2))
+                          .addComponent(presetLabel)
+                          .addComponent(customLabel))
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addComponent(presetPanel)
                         .addComponent(customPanel)
@@ -80,10 +77,10 @@ public class PaintPanel extends JPanel {
         layout.setVerticalGroup(
           layout.createSequentialGroup()
                   .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                          .addComponent(label1))
+                          .addComponent(presetLabel))
                           .addComponent(presetPanel)
                   .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                          .addComponent(label2)
+                          .addComponent(customLabel)
                           .addComponent(customPanel))
                   .addComponent(pcc.getPreviewPanel())
         );

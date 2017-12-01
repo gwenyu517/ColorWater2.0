@@ -48,11 +48,10 @@ public class Drop{
 
     private void determineNumOfPart(){
         int num = 6;
-        numOfPart = intensity;
-        for (int i = 1; i <= dropSize; ++i){
-            numOfPart += num * intensity;
+        for (int i = 2; i <= dropSize; ++i){
             num = 2 * num;
         }
+        numOfPart = num * intensity;
     }
 
     public void dripAt(Point point){
@@ -71,18 +70,26 @@ public class Drop{
         for (int i = 0; i <= dropSize; i++){
             theta = 0;
             if (i == 0){
-                drawParticlesAt(x, y, k, theta);
-                k += intensity;
+                drawParticlesAt(x, y);
+            }
+            else if (i == dropSize){
+                for (int j = 0; j < num; ++j) {
+                    x = point.x + p * Math.sin(theta);
+                    y = point.y + p * Math.cos(theta);
+
+                    drawAndSaveParticlesAt(x, y, k, theta);
+                    theta += dTheta;
+
+                    k += intensity;
+                }
             }
             else {
                 for (int j = 0; j < num; ++j) {
                     x = point.x + p * Math.sin(theta);
                     y = point.y + p * Math.cos(theta);
 
-                    drawParticlesAt(x, y, k, theta);
+                    drawParticlesAt(x, y);
                     theta += dTheta;
-
-                    k += intensity;
                 }
                 p += pRadius;
                 num = 2 * num;
@@ -91,7 +98,7 @@ public class Drop{
         }
     }
 
-    private void drawParticlesAt(double x, double y, int k, double theta){
+    private void drawAndSaveParticlesAt(double x, double y, int k, double theta){
         for (int i = 0; i < intensity; ++i){
             particles[k] = new Particle(x, y, theta);
             g2d.fill(new Ellipse2D.Double(particles[k].x, particles[k].y, pDiam, pDiam));
@@ -99,10 +106,16 @@ public class Drop{
         }
     }
 
+    private void drawParticlesAt(double x, double y){
+        for (int i = 0; i < intensity; ++i){
+            g2d.fill(new Ellipse2D.Double(x, y, pDiam, pDiam));
+        }
+    }
+
     public void spread(){
         double x, y;
 
-        for (int i = 9; i < numOfPart; ++i){
+        for (int i = 0; i < numOfPart; ++i){
             particles[i].determineBias();
             particles[i].determineDirection();
 
@@ -113,12 +126,12 @@ public class Drop{
 
 
             if (withinWetMask(x, y)){
-                g2d.fill(new Ellipse2D.Double(x, y, 10, 10));
+                g2d.fill(new Ellipse2D.Double(x, y, pDiam, pDiam));
                 particles[i].x = x;
                 particles[i].y = y;
             }
             else{
-                g2d.fill(new Ellipse2D.Double(particles[i].x, particles[i].y, 10, 10));
+                g2d.fill(new Ellipse2D.Double(particles[i].x, particles[i].y, pDiam, pDiam));
             }
         }
     }

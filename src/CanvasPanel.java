@@ -119,7 +119,7 @@ public class CanvasPanel extends JPanel {
     private void addWaterDropAt(Point point){
         new Thread( new Runnable(){
             public void run(){
-                Drop drop = new Drop(settings.getBrushSize(), waterLayer);
+                Drop drop = new Drop(settings.getWaterBrushSize(), waterLayer);
                 drop.setWetAreaMask(null);
                 drop.setDropColor(new Color(0,0,0,10));
 
@@ -130,14 +130,6 @@ public class CanvasPanel extends JPanel {
                         drop.spread();
 
                     waterLayer = drop.getImage();
-
-            /*        SwingUtilities.invokeLater(
-                            new Runnable(){
-                                public void run(){
-                                    repaint();
-                                }
-                            }
-                    );*/
                 }
             }
         }).start();
@@ -146,7 +138,7 @@ public class CanvasPanel extends JPanel {
     private void addPaintDropAt(Point point){
         new Thread( new Runnable(){
             public void run(){
-                Drop drop = new Drop(settings.getBrushSize(), paintLayer);
+                Drop drop = new Drop(settings.getPaintBrushSize(), paintLayer);
                 drop.setWetAreaMask(waterLayer);
                 drop.setDropColor(settings.getPaintColor());
 

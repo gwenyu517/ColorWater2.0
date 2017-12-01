@@ -6,7 +6,8 @@ import java.awt.*;
 public class Settings {
 
     protected Color paintColor;
-    protected int brushSize;
+    protected int waterBrushSize;
+    protected int paintBrushSize;
 
     protected double verticalAngle;
     protected double horizontalAngle;
@@ -17,7 +18,8 @@ public class Settings {
 
     public Settings(){
         paintColor = new Color(0,0,0,30);
-        brushSize = 5;
+        waterBrushSize = 5;
+        paintBrushSize = 5;
 
         verticalAngle = 0;
         horizontalAngle = 0;
@@ -31,8 +33,12 @@ public class Settings {
         return paintColor;
     }
 
-    public int getBrushSize(){
-        return brushSize;
+    public int getWaterBrushSize(){
+        return waterBrushSize;
+    }
+
+    public int getPaintBrushSize(){
+        return paintBrushSize;
     }
 
     public double getVerticalAngle(){
