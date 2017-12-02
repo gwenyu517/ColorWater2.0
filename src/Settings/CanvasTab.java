@@ -28,8 +28,8 @@ public class CanvasTab extends JPanel {
     private JLabel sizeLabel;
     private JLabel tiltLabel;
 
-    CanvasSizePanel sizePanel;
-    CanvasTiltPanel tiltPanel;
+    private CanvasSizePanel sizePanel;
+    private CanvasTiltPanel tiltPanel;
 
     public CanvasTab(Settings settings){
         this.settings = settings;
@@ -53,11 +53,11 @@ public class CanvasTab extends JPanel {
         layout.setHorizontalGroup(
                 layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(sizeLabel)
-                                .addComponent(tiltLabel))
+                                .addComponent(sizeLabel))
+                              //  .addComponent(tiltLabel))
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(sizePanel)
-                                .addComponent(tiltPanel))
+                                .addComponent(sizePanel))
+                               // .addComponent(tiltPanel))
         );
 
         layout.setVerticalGroup(
@@ -65,9 +65,9 @@ public class CanvasTab extends JPanel {
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                 .addComponent(sizeLabel)
                                 .addComponent(sizePanel))
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(tiltLabel)
-                                .addComponent(tiltPanel))
+                      //  .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        //        .addComponent(tiltLabel)
+                          //      .addComponent(tiltPanel))
         );
         layout.preferredLayoutSize(this);
     }

@@ -11,13 +11,15 @@ public class PaintTab extends JPanel {
 
     private GroupLayout layout;
 
-    private JLabel presetLabel;
-    private JLabel customLabel;
+    private final JLabel colorLabel = new JLabel("Color");
+    private final JLabel presetLabel = new JLabel("Presets");
+    private final JLabel customLabel = new JLabel("Custom");
 
     private JColorChooser pcc;
 
-    PresetColorPanel presetPanel;
-    CustomColorPanel customPanel;
+    private PresetColorPanel presetPanel;
+    private CustomColorPanel customPanel;
+    private PaintPreviewPanel previewPanel;
 
 
     public PaintTab(Settings settings){
@@ -28,20 +30,14 @@ public class PaintTab extends JPanel {
         setMaximumSize(size);
         setPreferredSize(size);*/
 
-        presetLabel = new JLabel("Presets");
-        customLabel = new JLabel("Custom");
-
         pcc = new JColorChooser();
         pcc.getSelectionModel().addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 Color chosenColor = pcc.getColor();
-                //  settings.paintColor = chosenColor;
-                //customPanel.syncColor(chosenColor);
-
-
                 Color it = new Color(chosenColor.getRed(), chosenColor.getGreen(), chosenColor.getBlue(), 10);
                 settings.setPaintColor(it);
                 customPanel.syncColor(it);
+                previewPanel.setColor(chosenColor);
             }
         });
 
@@ -50,6 +46,9 @@ public class PaintTab extends JPanel {
 
         AbstractColorChooserPanel panels[] = {presetPanel, customPanel};
         pcc.setChooserPanels(panels);
+
+        previewPanel = new PaintPreviewPanel(30,100);
+        pcc.setPreviewPanel(previewPanel);
 
         //  pcc.setPreviewPanel(new JPanel());
 
@@ -64,6 +63,39 @@ public class PaintTab extends JPanel {
         layout.setAutoCreateContainerGaps(true);
 
         layout.setHorizontalGroup(
+                layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(colorLabel))
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                        .addComponent(presetLabel)
+                                        .addComponent(presetPanel)
+                                )
+                                .addComponent(customLabel)
+                                .addGroup(layout.createSequentialGroup()
+                                        .addComponent(customPanel)
+                                        .addComponent(previewPanel)
+                                )
+                        )
+        );
+        layout.setVerticalGroup(
+                layout.createSequentialGroup()
+                        .addComponent(colorLabel)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(presetLabel)
+                                .addComponent(presetPanel)
+                        )
+                        .addComponent(customLabel)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                                .addComponent(customPanel)
+                                .addComponent(previewPanel)
+                        )
+        );
+
+
+
+
+  /*      layout.setHorizontalGroup(
                 layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                 .addComponent(presetLabel)
@@ -84,7 +116,7 @@ public class PaintTab extends JPanel {
                                 .addComponent(customPanel))
                         .addComponent(pcc.getPreviewPanel())
         );
-
+*/
         layout.preferredLayoutSize(this);
     }
 }

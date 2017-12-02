@@ -10,7 +10,7 @@ import java.beans.PropertyChangeListener;
 import java.text.NumberFormat;
 
 public class CanvasSizePanel extends JPanel {
-    CanvasDimension dimension;
+    private CanvasDimension dimension;
 
     private GroupLayout layout;
 
@@ -19,11 +19,11 @@ public class CanvasSizePanel extends JPanel {
 
     // Preset radio buttons
     private final JLabel presetLabel = new JLabel("Presets:");
-    JRadioButton preset1;
-    JRadioButton preset2;
-    JRadioButton preset3;
+    private JRadioButton preset1;
+    private JRadioButton preset2;
+    private JRadioButton preset3;
 
-    ButtonGroup group;
+    private ButtonGroup group;
 
     // Custom input fields
     private final JLabel customLabel = new JLabel("Custom:");
@@ -42,8 +42,6 @@ public class CanvasSizePanel extends JPanel {
         groupButtons();
 
         createTextFields();
-    //    add(customWidthField);
-   //     add(customHeightField);
         createResizeButton();
 
         createLayout();

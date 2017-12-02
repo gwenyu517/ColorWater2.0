@@ -38,7 +38,7 @@ public class BrushTab extends JPanel {
         paintBrushSizeSlider = new JSlider(JSlider.HORIZONTAL, SIZE_MIN, SIZE_MAX, SIZE_INIT);
 
         //Turn on labels at major tick marks
-        paintBrushSizeSlider.setMajorTickSpacing(10);
+        paintBrushSizeSlider.setMajorTickSpacing(9);
         paintBrushSizeSlider.setMinorTickSpacing(1);
         paintBrushSizeSlider.setPaintTicks(true);
         paintBrushSizeSlider.setPaintLabels(true);
@@ -58,7 +58,7 @@ public class BrushTab extends JPanel {
         waterBrushSizeSlider = new JSlider(JSlider.HORIZONTAL, SIZE_MIN, SIZE_MAX, SIZE_INIT);
 
         //Turn on labels at major tick marks
-        waterBrushSizeSlider.setMajorTickSpacing(10);
+        waterBrushSizeSlider.setMajorTickSpacing(9);
         waterBrushSizeSlider.setMinorTickSpacing(1);
         waterBrushSizeSlider.setPaintTicks(true);
         waterBrushSizeSlider.setPaintLabels(true);
