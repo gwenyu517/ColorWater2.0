@@ -21,13 +21,8 @@ public class CanvasDimension extends Observable{
         return this.height;
     }
 
-    public void setWidth(int width){
+    public void setDimension(int width, int height){
         this.width = width;
-        setChanged();
-        notifyObservers();
-    }
-
-    public void setHeight(int height){
         this.height = height;
         setChanged();
         notifyObservers();

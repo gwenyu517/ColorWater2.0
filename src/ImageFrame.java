@@ -66,7 +66,7 @@ public class ImageFrame extends JFrame implements Observer{
     }
 
     public void update(Observable o, Object arg){
- /*       Object[] options = { "OK", "CANCEL" };
+        Object[] options = { "OK", "CANCEL" };
         int k = JOptionPane.showOptionDialog(null,
                 "Changing the size will clear the canvas. Continue?", "Warning",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
@@ -74,10 +74,10 @@ public class ImageFrame extends JFrame implements Observer{
         if (k == 0){
             canvas.stopPaint();
             remove(canvas);
-            canvas = new Canvas(settings);
-            this.getContentPane().add(canvas, BorderLayout.CENTER);
-            repaint();
-        }*/
+            addCanvas();
+            this.pack();
+            this.setVisible(true);
+        }
 
     }
 }

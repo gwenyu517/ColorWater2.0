@@ -74,8 +74,6 @@ public class Canvas extends JPanel {
             }
         });
         dryTimer.start();
-
-        System.out.println("HHHHHHHHHHIIIIIIIIIIIIIIIIIIII");
     }
 
     private void createNewCanvas(){
@@ -115,8 +113,6 @@ public class Canvas extends JPanel {
     }
 
     private void addPaintDropAt(Point point){
-        System.out.println("lol");
-
         new Thread( strokes, new Runnable(){
             public void run(){
                 Drop drop = new Drop(settings.getPaintBrushSize(), paintLayer);
@@ -145,8 +141,6 @@ public class Canvas extends JPanel {
 
     public void stopPaint(){
         strokes.destroy();
-        if (strokes.isDaemon())
-            System.out.println("???????????");
     }
 
     public void paintComponent(Graphics g){
