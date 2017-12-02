@@ -12,6 +12,7 @@ public class Particle {
     protected double theta;
     protected double direction;
     protected double bias;
+    protected double diameter;
 
     public Particle(double x, double y, double theta){
     //    color = new Color(0, 0, 0, 13);
@@ -28,6 +29,10 @@ public class Particle {
 
         transmissionProb = randomValue();
         determineBias();
+    }
+
+    protected void setDiameter(double d){
+        diameter = d;
     }
 
     protected void determineBias(){

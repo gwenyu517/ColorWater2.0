@@ -76,6 +76,14 @@ public class Canvas extends JPanel {
         dryTimer.start();
     }
 
+    public void setPaintLayer(BufferedImage image){
+        this.paintLayer = image;
+    }
+
+    public BufferedImage getImage(){
+        return this.paintLayer;
+    }
+
     private void createNewCanvas(){
         p_g2d.setColor(Color.WHITE);
         p_g2d.fillRect(0, 0, WIDTH, HEIGHT);
