@@ -14,7 +14,7 @@ public class Drop{
     private Point location;
     private Particle[] particles;
     private int numOfPart;
-    private int pRadius = 5;
+    private int pRadius = 3;
     private int pDiam = 2 * pRadius;
 
     private int intensity = 2;

@@ -25,11 +25,6 @@ public class PaintTab extends JPanel {
     public PaintTab(Settings settings){
         this.settings = settings;
 
-   /*     Dimension size = new Dimension(500, 100);
-        setMinimumSize(size);
-        setMaximumSize(size);
-        setPreferredSize(size);*/
-
         pcc = new JColorChooser();
         pcc.getSelectionModel().addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
@@ -49,8 +44,6 @@ public class PaintTab extends JPanel {
 
         previewPanel = new PaintPreviewPanel(30,100);
         pcc.setPreviewPanel(previewPanel);
-
-        //  pcc.setPreviewPanel(new JPanel());
 
         createLayout();
     }
@@ -92,31 +85,6 @@ public class PaintTab extends JPanel {
                         )
         );
 
-
-
-
-  /*      layout.setHorizontalGroup(
-                layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(presetLabel)
-                                .addComponent(customLabel))
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(presetPanel)
-                                .addComponent(customPanel)
-                                .addComponent(pcc.getPreviewPanel()))
-        );
-
-        layout.setVerticalGroup(
-                layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(presetLabel))
-                        .addComponent(presetPanel)
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(customLabel)
-                                .addComponent(customPanel))
-                        .addComponent(pcc.getPreviewPanel())
-        );
-*/
         layout.preferredLayoutSize(this);
     }
 }

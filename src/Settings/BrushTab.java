@@ -13,28 +13,30 @@ public class BrushTab extends JPanel {
     private final int SIZE_MAX = 10;
     private final int SIZE_INIT = 5;
 
-    private JLabel pbLabel;
-    private JLabel wbLabel;
+    private final JLabel label = new JLabel("Brush Size");
+    private final JLabel pbLabel = new JLabel("Paint Brush");
+    private final JLabel wbLabel = new JLabel("Water Brush");
 
     private JSlider paintBrushSizeSlider;
     private JSlider waterBrushSizeSlider;
 
+    private BrushPreviewPanel pBPreview;
+    private BrushPreviewPanel wBPreview;
+
     protected BrushTab(Settings settings){
         this.settings = settings;
 
-        pbLabel = new JLabel("Paint Brush Size");
-        wbLabel = new JLabel("Water Brush Size");
-
         // Create slider
-        addPBSlider();
-        addWBSlider();
+        createPBSlider();
+        createWBSlider();
 
-        // ToDo: addPreview();
+        createPBPreview();
+        createWBPreview();
 
         createLayout();
     }
 
-    private void addPBSlider(){
+    private void createPBSlider(){
         paintBrushSizeSlider = new JSlider(JSlider.HORIZONTAL, SIZE_MIN, SIZE_MAX, SIZE_INIT);
 
         //Turn on labels at major tick marks
@@ -48,13 +50,15 @@ public class BrushTab extends JPanel {
         paintBrushSizeSlider.addChangeListener(new ChangeListener(){
             public void stateChanged(ChangeEvent e){
                 JSlider source = (JSlider)e.getSource();
-                if (!source.getValueIsAdjusting())
+               // if (!source.getValueIsAdjusting()) {
                     settings.setPaintBrushSize(source.getValue());
+                    pBPreview.drawShape(source.getValue());
+             //   }
             }
         });
     }
 
-    private void addWBSlider(){
+    private void createWBSlider(){
         waterBrushSizeSlider = new JSlider(JSlider.HORIZONTAL, SIZE_MIN, SIZE_MAX, SIZE_INIT);
 
         //Turn on labels at major tick marks
@@ -68,10 +72,21 @@ public class BrushTab extends JPanel {
         waterBrushSizeSlider.addChangeListener(new ChangeListener(){
             public void stateChanged(ChangeEvent e){
                 JSlider source = (JSlider)e.getSource();
-                if (!source.getValueIsAdjusting())
+              //  if (!source.getValueIsAdjusting())
                     settings.setWaterBrushSize(source.getValue());
+                    wBPreview.drawShape(source.getValue());
             }
         });
+    }
+
+    private void createPBPreview(){
+        pBPreview = new BrushPreviewPanel(100, 100);
+        pBPreview.drawShape(5);
+    }
+
+    private void createWBPreview(){
+        wBPreview = new BrushPreviewPanel(100, 100);
+        wBPreview.drawShape(5);
     }
 
     private void createLayout(){
@@ -81,6 +96,40 @@ public class BrushTab extends JPanel {
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
 
+        layout.setHorizontalGroup(
+                layout.createSequentialGroup()
+                        .addComponent(label)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(pbLabel)
+                                .addGroup(layout.createSequentialGroup()
+                                        .addComponent(paintBrushSizeSlider)
+                                        .addComponent(pBPreview)
+                                )
+                                .addComponent(wbLabel)
+                                .addGroup(layout.createSequentialGroup()
+                                        .addComponent(waterBrushSizeSlider)
+                                        .addComponent(wBPreview)
+                                )
+                        )
+        );
+
+        layout.setVerticalGroup(
+                layout.createSequentialGroup()
+                        .addComponent(label)
+                        .addComponent(pbLabel)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                .addComponent(paintBrushSizeSlider)
+                                .addComponent(pBPreview)
+                        )
+                        .addComponent(wbLabel)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                .addComponent(waterBrushSizeSlider)
+                                .addComponent(wBPreview)
+                        )
+        );
+
+
+       /*
 
         layout.setHorizontalGroup(
                 layout.createSequentialGroup()
@@ -90,17 +139,23 @@ public class BrushTab extends JPanel {
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                 .addComponent(paintBrushSizeSlider)
                                 .addComponent(waterBrushSizeSlider))
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(pBPreview)
+                                .addComponent(wBPreview)
+                        )
         );
 
         layout.setVerticalGroup(
                 layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(pbLabel))
-                        .addComponent(paintBrushSizeSlider)
+                                .addComponent(pbLabel)
+                                .addComponent(paintBrushSizeSlider)
+                                .addComponent(pBPreview))
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                 .addComponent(wbLabel)
-                                .addComponent(waterBrushSizeSlider))
-        );
+                                .addComponent(waterBrushSizeSlider)
+                                .addComponent(wBPreview))
+        );*/
 
         layout.preferredLayoutSize(this);
     }

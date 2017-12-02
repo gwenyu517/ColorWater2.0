@@ -2,16 +2,19 @@ package Settings;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 
-public class PaintPreviewPanel extends JPanel {
-    private int WIDTH;
-    private int HEIGHT;
+public class BrushPreviewPanel extends JPanel {
+    private final int WIDTH;
+    private final int HEIGHT;
 
     private BufferedImage image;
     private Graphics2D g2d;
 
-    public PaintPreviewPanel(int width, int height){
+    private int particleRadius = 3;
+
+    public BrushPreviewPanel(int width, int height){
         WIDTH = width;
         HEIGHT = height;
 
@@ -23,20 +26,29 @@ public class PaintPreviewPanel extends JPanel {
         image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
         g2d = image.createGraphics();
 
-        g2d.setColor(Color.BLACK);
-        g2d.fillRect(0, 0, WIDTH, HEIGHT);
     }
 
     public void setColor(Color color){
-        clearImage();
         g2d.setColor(color);
-        g2d.fillRect(0, 0, WIDTH, HEIGHT);
-        repaint();
     }
 
     private void clearImage(){
         g2d.setColor(Color.WHITE);
-        g2d.fillRect(0, 0, WIDTH, HEIGHT);
+        g2d.fillRect(0,0, WIDTH, HEIGHT);
+    }
+
+    public void drawShape(int size){
+        clearImage();
+
+        g2d.setColor(Color.BLACK);
+
+        double x = WIDTH / 2;
+        double y = HEIGHT / 2;
+
+        int radius = (size + 1) * particleRadius;
+
+        g2d.fill(new Ellipse2D.Double(x - radius, y - radius, 2 * radius, 2 * radius));
+        repaint();
     }
 
     public void paintComponent(Graphics g){
