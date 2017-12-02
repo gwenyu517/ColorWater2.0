@@ -7,16 +7,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class CanvasTab extends JPanel {
-    /* SIZE
-     Radio buttons:
-        Presets:    1000x1000 (Default)
-                    800x800
-                    500x800
-       Text enter:
-         Custom:
-            Width: _______ Enter
-            Height: _______ Enter
-
+    /*
        TILT
        Radio buttons:
             None (selected)

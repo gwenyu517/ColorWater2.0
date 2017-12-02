@@ -41,11 +41,10 @@ public class CanvasSizePanel extends JPanel {
         createButtons();
         groupButtons();
 
-
         createTextFields();
-
+    //    add(customWidthField);
+   //     add(customHeightField);
         createResizeButton();
-
 
         createLayout();
 }
@@ -56,8 +55,8 @@ public class CanvasSizePanel extends JPanel {
         preset1.setSelected(true);
         preset1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                chosenWidth = 1000;
-                chosenHeight = 1000;
+                customWidthField.setValue(1000);
+                customHeightField.setValue(1000);
                 dimension.setDimension(1000, 1000);
             }
         });
@@ -66,8 +65,8 @@ public class CanvasSizePanel extends JPanel {
         preset2.setActionCommand("preset2");
         preset2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                chosenWidth = 800;
-                chosenHeight = 800;
+                customWidthField.setValue(800);
+                customHeightField.setValue(1000);
                 dimension.setDimension(800, 800);
             }
         });
@@ -76,8 +75,8 @@ public class CanvasSizePanel extends JPanel {
         preset3.setActionCommand("preset3");
         preset3.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                chosenWidth = 600;
-                chosenHeight = 800;
+                customWidthField.setValue(600);
+                customHeightField.setValue(800);
                 dimension.setDimension(600, 800);
             }
         });
@@ -91,9 +90,9 @@ public class CanvasSizePanel extends JPanel {
     }
 
     private void createTextFields(){
-        customWidthField = new JFormattedTextField(NumberFormat.getIntegerInstance());
+        customWidthField = new JFormattedTextField();
         customWidthField.setValue(chosenWidth);
-        customWidthField.setColumns(20);
+        customWidthField.setColumns(7);
 
         customWidthField.addPropertyChangeListener("canvasWidth", new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent evt) {
@@ -101,9 +100,9 @@ public class CanvasSizePanel extends JPanel {
             }
         });
 
-        customHeightField = new JFormattedTextField(NumberFormat.getIntegerInstance());
+        customHeightField = new JFormattedTextField();
         customHeightField.setValue(chosenHeight);
-        customHeightField.setColumns(5);
+        customHeightField.setColumns(7);
         customHeightField.addPropertyChangeListener("canvasHeight", new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent evt) {
            //     chosenHeight = ((Number)customHeightField.getValue()).intValue();
@@ -120,11 +119,17 @@ public class CanvasSizePanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 chosenWidth = ((Number)customWidthField.getValue()).intValue();
                 chosenHeight = ((Number)customHeightField.getValue()).intValue();
-                customWidthField.setValue(chosenWidth);
-                customHeightField.setValue(chosenHeight);
-                dimension.setDimension(chosenWidth, chosenHeight);
+                if (dimensionsAreAppropriate()){
+                    customWidthField.setValue(chosenWidth);
+                    customHeightField.setValue(chosenHeight);
+                    dimension.setDimension(chosenWidth, chosenHeight);
+                }
             }
         });
+    }
+
+    private boolean dimensionsAreAppropriate(){
+        return true;
     }
 
     private void createLayout(){
@@ -137,30 +142,50 @@ public class CanvasSizePanel extends JPanel {
         layout.setHorizontalGroup(
                 layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(presetLabel)
-                                .addComponent(customLabel))
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(preset1)
-                                .addComponent(preset2)
-                                .addComponent(preset3)
-                                .addComponent(customWidthField)
-                                .addComponent(customHeightField)
-                                .addComponent(button))
+                                .addGroup(layout.createSequentialGroup()
+                                        .addComponent(presetLabel)
+                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                .addComponent(preset1)
+                                                .addComponent(preset2)
+                                                .addComponent(preset3)
+                                        )
+                                )
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                        .addComponent(customLabel)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(customWLabel)
+                                                        .addComponent(customHLabel)
+                                                )
+                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(customWidthField)
+                                                        .addComponent(customHeightField)
+                                                        .addComponent(button)
+                                                )
+                                        )
+                                )
+                        )
         );
 
         layout.setVerticalGroup(
                 layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(presetLabel)
-                                .addComponent(preset1))
+                                .addComponent(preset1)
+                        )
                         .addComponent(preset2)
                         .addComponent(preset3)
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(customLabel)
-                                .addComponent(customWidthField))
-                        .addComponent(customHeightField)
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addComponent(button))
+                        .addComponent(customLabel)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(customWLabel)
+                                .addComponent(customWidthField)
+                        )
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(customHLabel)
+                                .addComponent(customHeightField)
+                        )
+                        .addComponent(button)
+
         );
 
         layout.preferredLayoutSize(this);
